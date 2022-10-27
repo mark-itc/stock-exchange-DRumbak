@@ -2,3 +2,21 @@
   margin: 0;
   padding: 0;
 }
+
+.image-gallery {
+  margin-right: 25px;
+  width: 50px;
+}
+
+.company-atag {
+  text-decoration: none;
+  margin-right: 25px;
+}
+
+.percentage-change-GREEN {
+  color: green;
+}
+
+.percentage-change-RED {
+  color: red;
+}
