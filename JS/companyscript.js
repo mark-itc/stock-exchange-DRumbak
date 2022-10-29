@@ -14,32 +14,39 @@ window.onload = () => {
   const urlPriceHistory = `https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/historical-price-full/${symbol}?serietype=line`;
 
   async function getCompanyProfile(url) {
-    const response = await fetch(url);
-    const result = await response.json();
-    populateCompanyProfile(result);
-    getStockPriceHistory(urlPriceHistory);
+    try {
+      const response = await fetch(url);
+      const result = await response.json();
+      populateCompanyProfile(result);
+      getStockPriceHistory(urlPriceHistory);
+    } catch {
+      console.log("Error");
+    }
   }
 
   async function getStockPriceHistory(url) {
-    spinner.classList.remove("d-none");
-    const response = await fetch(url);
-    const result = await response.json();
-    console.log(result.historical);
-    const stockPriceHistArray = result.historical;
+    try {
+      spinner.classList.remove("d-none");
+      const response = await fetch(url);
+      const result = await response.json();
+      const stockPriceHistArray = result.historical;
 
-    let dArray = [];
-    let cArray = [];
+      let dArray = [];
+      let cArray = [];
 
-    for (let i = 1; i < stockPriceHistArray.length; i += 365) {
-      dArray.push(stockPriceHistArray[i].date);
-      cArray.push(stockPriceHistArray[i].close);
+      for (let i = 1; i < stockPriceHistArray.length; i += 365) {
+        dArray.push(stockPriceHistArray[i].date);
+        cArray.push(stockPriceHistArray[i].close);
+      }
+
+      dArray = dArray.reverse();
+      cArray = cArray.reverse();
+
+      spinner.classList.add("d-none");
+      buildStockPriceHistoryChart(dArray, cArray);
+    } catch {
+      console.log("Error");
     }
-
-    dArray = dArray.reverse();
-    cArray = cArray.reverse();
-
-    spinner.classList.add("d-none");
-    buildStockPriceHistoryChart(dArray, cArray);
   }
 
   function populateCompanyProfile(result) {
