@@ -2,7 +2,6 @@ const searchBtn = document.getElementById("button-addon2");
 searchBtn.addEventListener("click", getStocks);
 const stockList = document.getElementById("search-resultslist");
 const spinner = document.getElementById("spinner");
-const marquee = document.getElementById("marquee");
 let stocksArray = [];
 
 async function getStocks() {
@@ -60,24 +59,3 @@ function buildSearchResults(results) {
     }
   }
 }
-
-async function getTop100NASDAQCompaniesAndChange() {
-  try {
-    const urlTop100NAS = `https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/quotes/nasdaq`;
-    const response = await fetch(urlTop100NAS);
-    const result = await response.json();
-
-    const companyNameArray = [];
-    const companyPriceArray = [];
-
-    let tickerPriceList = "";
-    for (let { symbol: coSymbol, price: coPrice } of result) {
-      tickerPriceList += `<span class="me-3">${coSymbol}</span><span class="percentage-change-GREEN me-3">$${coPrice}</span>`;
-    }
-    marquee.innerHTML += tickerPriceList;
-  } catch {
-    console.log("Error");
-  }
-}
-
-getTop100NASDAQCompaniesAndChange();
