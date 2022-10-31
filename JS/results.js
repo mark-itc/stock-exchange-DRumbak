@@ -1,23 +1,8 @@
-const searchBtn = document.getElementById("button-addon2");
-searchBtn.addEventListener("click", getStocks);
 const stockList = document.getElementById("search-resultslist");
 const spinner = document.getElementById("spinner");
 let stocksArray = [];
 
-async function getStocks() {
-  try {
-    stockList.innerHTML = "";
-    spinner.classList.remove("d-none");
-    stocksArray = [];
-    const searchValue = document.getElementById("search-input").value;
-    const fullURL = `https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/search?query=${searchValue}&limit=10&exchange=NASDAQ`;
-    const response = await fetch(fullURL);
-    const result = await response.json();
-    getSingleStocks(result);
-  } catch {
-    console.log("Error");
-  }
-}
+export { getSingleStocks, stockList, spinner };
 
 async function getSingleStocks(stocks) {
   try {
