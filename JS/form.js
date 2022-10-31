@@ -23,3 +23,5 @@ class SearchForm {
 const initializeSearchInstance = new SearchForm();
 
 searchBtn.addEventListener("click", initializeSearchInstance.getStocks);
+
+//Milestone 7 incomplete.
